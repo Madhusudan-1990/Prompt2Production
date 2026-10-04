@@ -1,0 +1,81 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="E-Commerce API Regression Suite" verbose="2">
+
+    <test name="01 Authentication and Access">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.AuthenticationAccessTest"/>
+        </classes>
+    </test>
+    <test name="02 Product Endpoints">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.ProductEndpointsTest"/>
+        </classes>
+    </test>
+    <test name="03 User Endpoints">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.UserEndpointsTest"/>
+        </classes>
+    </test>
+    <test name="04 Order Management">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.OrderManagementTest"/>
+        </classes>
+    </test>
+    <test name="05 Payment Integration Gap">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.PaymentGapTest"/>
+        </classes>
+    </test>
+    <test name="06 Shopping Cart Gap">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.ShoppingCartGapTest"/>
+        </classes>
+    </test>
+    <test name="07 Inventory Management Gap">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.InventoryGapTest"/>
+        </classes>
+    </test>
+    <test name="08 Search and Filter Gap">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.SearchGapTest"/>
+        </classes>
+    </test>
+    <test name="09 Error Handling and Edge Cases">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.ErrorHandlingTest"/>
+        </classes>
+    </test>
+    <test name="10 HTTP Methods and CORS">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.CorsOptionsTest"/>
+        </classes>
+    </test>
+    <test name="11 Pagination Gap">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.PaginationGapTest"/>
+        </classes>
+    </test>
+    <test name="12 Data Validation and Constraints">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.ValidationTest"/>
+        </classes>
+    </test>
+    <test name="13 Sorting Gap">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.SortingGapTest"/>
+        </classes>
+    </test>
+    <test name="14 Status and Category Filters Gap">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.StatusCategoryFilterTest"/>
+        </classes>
+    </test>
+    <test name="15 Rate Limiting and Performance">
+        <classes>
+            <class name="com.qa.api.ecommerce.tests.RateLimitPerformanceTest"/>
+        </classes>
+    </test>
+
+</suite>
