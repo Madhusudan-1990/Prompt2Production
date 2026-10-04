@@ -1,12 +1,9 @@
 package com.qa.api.base;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
 import com.qa.api.client.RestClient;
 import com.qa.api.manager.ConfigManager;
-import com.qa.api.mocking.WireMockSetup;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -16,55 +13,49 @@ public class BaseTest
 {
 	protected RestClient restClient;
 	
-	//****************************** API Base URLs *******************************/
-	protected  static String BASE_URL_GOREST;
-	protected  static String BASE_URL_CONTACTS;
-	protected  static String BASE_URL_RESTFUL;
-	protected  static String BASE_URL_BASIC_AUTH;
-	protected  static String BASE_URL_PRODUCTS;
-	protected  static String BASE_URL_SPOTIFY_ACCOUNT;
-	protected  static String BASE_URL_SPOTIFY_API;
-	protected  static String BASE_URL_ERGAST_CIRCUIT;
-	protected  static String BASE_URL_MOCK_SERVER = "http://localhost:8089"; 
+	//****************************** API Base URL *******************************/
+	protected  static String BASE_URL_ECOMMERCE;
 
 	
-	//****************************** API EndPoints *******************************/
-	protected final static String GOREST_USERS_ENDPOINT = "/public/v2/users";
-	protected final static String CONTACTS_LOGIN_ENDPOINT = "/users/login";
-	protected final static String CONTACTS_ENDPOINT = "/contacts";
-	protected final static String RESTFUL_OBJECTS_ENDPOINT = "/objects";
-	protected final static String BASIC_AUTH_ENDPOINT = "/basic_auth";
-	protected final static String PRODUCTS_ENDPOINT = "/products";
-	protected final static String SPOTIFY_ACCOUNT_ENDPOINT = "/api/token";
-	protected final static String SPOTIFY_API_ENDPOINT = "/v1/albums/4aawyAB9vmqN3uQ7FjRGTy";
-	protected final static String ERGAST_CIRCUIT_ENDPOINT = "/api/f1/2017/circuits.xml";
-	protected final static String MOCK_SERVER_ENDPOINT = "/api/users";
+	//****************************** E-Commerce EndPoints *******************************/
+	protected final static String ECOMMERCE_PRODUCTS_ENDPOINT = "/products";
+	protected final static String ECOMMERCE_PRODUCT_ENDPOINT = "/products/{id}";
+	protected final static String ECOMMERCE_PRODUCT_SELECT_ENDPOINT = "/products/{id}/select";
+	protected final static String ECOMMERCE_PRODUCT_CATEGORIES_ENDPOINT = "/products/categories";
+	protected final static String ECOMMERCE_PRODUCT_SEARCH_ENDPOINT = "/products/search";
+	protected final static String ECOMMERCE_PRODUCT_CATEGORY_ENDPOINT = "/products/category/{category}";
+	protected final static String ECOMMERCE_USERS_ENDPOINT = "/users";
+	protected final static String ECOMMERCE_USER_ENDPOINT = "/users/{id}";
+	protected final static String ECOMMERCE_ORDERS_ENDPOINT = "/orders";
+	protected final static String ECOMMERCE_ORDER_ENDPOINT = "/orders/{id}";
+	protected final static String ECOMMERCE_PAYMENTS_ENDPOINT = "/payments";
+	protected final static String ECOMMERCE_PAYMENT_ENDPOINT = "/payments/{id}";
+	protected final static String ECOMMERCE_CART_ENDPOINT = "/cart";
+	protected final static String ECOMMERCE_CART_ITEMS_ENDPOINT = "/cart/items";
+	protected final static String ECOMMERCE_CART_ITEM_ENDPOINT = "/cart/items/{itemId}";
+	protected final static String ECOMMERCE_INVENTORY_ENDPOINT = "/inventory";
+	protected final static String ECOMMERCE_INVENTORY_ITEM_ENDPOINT = "/inventory/{id}";
+	protected final static String ECOMMERCE_PURCHASES_ENDPOINT = "/purchases";
+	protected final static String ECOMMERCE_OPENAPI_ENDPOINT = "/openapi.json";
+	protected final static String ECOMMERCE_HEALTH_ENDPOINT = "/internal/health";
+	protected final static String ECOMMERCE_ADMIN_STATS_ENDPOINT = "/admin/stats";
+	protected final static String ECOMMERCE_DEBUG_DB_ENDPOINT = "/debug/db";
 	
 	@BeforeTest
 	public void initSetup()
 	{
 		RestAssured.filters(new AllureRestAssured());
-		BASE_URL_GOREST = ConfigManager.get("baseurl.gorest").trim();
-		BASE_URL_CONTACTS = ConfigManager.get("baseurl.contact").trim();
-		BASE_URL_RESTFUL = ConfigManager.get("baseurl.restful").trim();
-		BASE_URL_BASIC_AUTH = ConfigManager.get("baseurl.basicsauth").trim();
-		BASE_URL_PRODUCTS = ConfigManager.get("baseurl.products").trim();
-		BASE_URL_SPOTIFY_ACCOUNT = ConfigManager.get("baseurl.spotifyaccount").trim();
-		BASE_URL_SPOTIFY_API = ConfigManager.get("baseurl.spotifyapi").trim();
-		BASE_URL_ERGAST_CIRCUIT = ConfigManager.get("baseurl.circuit").trim();
+		BASE_URL_ECOMMERCE = ConfigManager.get("baseurl.ecommerce").trim();
 	}
 	
-	//3a
 	@BeforeTest
 	public void setup() 
 	{
 			restClient = new RestClient();
-			WireMockSetup.startWireMockServer();
 	}
 	
 	@AfterTest
 	public void stopMockServer() 
 	{
-			WireMockSetup.stopWireMockServer();
 	}
 }

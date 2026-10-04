@@ -237,10 +237,45 @@ public class RestClient
 				{
 					  RequestSpecification request= setupRequest(baseUrl, authType, contentType); // Calling setupRequest Method
 					  applyParams(request, queryParams, pathParams);
-					  Response response = request.delete(endPoint).then().spec(responseSpec204).extract().response();
+					  Response response = request.delete(endPoint).then().spec(responseSpec204).extract().response(); // This will return 204 if found else 404 and extract the response
 					  response.prettyPrint();
 					     return response;
 				}
+
+	//1h Spec-free execution (no fixed ResponseSpecification) - used when the test itself owns the expected
+	// status code (negative cases such as 400/405/422/500, CORS preflight, HEAD). Also supports extra headers
+	// (Origin, Access-Control-Request-Method/Headers) which setupRequest() does not add.
+	/**
+	 * @param method HTTP method (GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD)
+	 * @param headers extra request headers or null
+	 */
+	public Response execute(String method, String baseUrl, String endPoint, Object body,
+			Map<String, String> headers,
+			Map<String, String> queryParams,
+			Map<String, String> pathParams,
+			AuthType authType,
+			ContentType contentType)
+	{
+		RequestSpecification request = setupRequest(baseUrl, authType, contentType);
+		if (headers != null)
+		{
+			headers.forEach(request::header);
+		}
+		applyParams(request, queryParams, pathParams);
+		if (body != null)
+		{
+			request.body(body);
+		}
+		Response response = request.request(method, endPoint).then().extract().response();
+		response.prettyPrint();
+		return response;
+	}
+
+	public Response get(String baseUrl, String endPoint, AuthType authType, ContentType contentType)
+	{
+		return execute("GET", baseUrl, endPoint, null, null, null, null, authType, contentType);
+	}
+
 	
 	
 }
