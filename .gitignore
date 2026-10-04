@@ -1,1 +1,7 @@
 /target/
+allure-results/
+test-output/
+.classpath
+.project
+.settings/
+.idea/
