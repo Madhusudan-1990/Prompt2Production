@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>RestAssuredAPITestingFramework</groupId>
-  <artifactId>RestAssuredAPITestingFramework</artifactId>
+  <groupId>com.qa</groupId>
+  <artifactId>prompt2production</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>RestAssuredAPITestingFramework</name>
+  <name>Prompt2Production - E-Commerce API Suite</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -107,4 +107,31 @@
     <version>3.13.0</version>
 </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <!-- JDK 23+ disables annotation processing by default; enable it so Lombok generates POJO accessors -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>11</release>
+          <proc>full</proc>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.42</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>

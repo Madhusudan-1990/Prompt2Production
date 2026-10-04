@@ -1,0 +1,35 @@
+name: e-commerce-suite
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Run e-commerce regression suite (101 tests)
+        run: >
+          mvn -B clean test
+          -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_ecommerce_regression.xml
+          -Denv=prod
+
+      - name: Upload surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports/
+          retention-days: 7

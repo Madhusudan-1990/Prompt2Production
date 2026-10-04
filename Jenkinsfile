@@ -26,17 +26,17 @@ stages {
     stage('Checkout API Framework') {
         steps {
             dir('api-framework') {
-                git branch: 'main', url: 'https://github.com/Madhusudan-1990/RestAssuredAPIAutomationFramework.git'
+                git branch: 'main', url: 'https://github.com/Madhusudan-1990/Prompt2Production.git'
             }
         }
     }
 
-    stage('Sanity API Test - DEV') {
+    stage('E-Commerce API Test - DEV') {
         steps {
             dir('api-framework') {
                 script {
                     def status = bat(
-                        script: "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml -Denv=dev",
+                        script: "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_ecommerce_regression.xml -Denv=dev",
                         returnStatus: true
                     )
                     if (status != 0) {
@@ -48,12 +48,12 @@ stages {
         }
     }
 
-    stage('Regression API Test - QA') {
+    stage('E-Commerce API Test - QA') {
         steps {
             dir('api-framework') {
                 script {
                     def status = bat(
-                        script: "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_regression.xml -Denv=qa",
+                        script: "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_ecommerce_regression.xml -Denv=qa",
                         returnStatus: true
                     )
                     if (status != 0) {
@@ -65,12 +65,12 @@ stages {
         }
     }
 
-    stage('Sanity API Test - STAGE') {
+    stage('E-Commerce API Test - STAGE') {
         steps {
             dir('api-framework') {
                 script {
                     def status = bat(
-                        script: "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml -Denv=stage",
+                        script: "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_ecommerce_regression.xml -Denv=stage",
                         returnStatus: true
                     )
                     if (status != 0) {
@@ -82,10 +82,10 @@ stages {
         }
     }
 
-    stage('Sanity API Test - PROD') {
+    stage('E-Commerce API Test - PROD') {
         steps {
             dir('api-framework') {
-                bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml -Denv=prod"
+                bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_ecommerce_regression.xml -Denv=prod"
             }
         }
     }
